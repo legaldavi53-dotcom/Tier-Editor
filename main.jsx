@@ -30,6 +30,7 @@ function App(){
  const boardRef=useRef(null),fileRef=useRef(null),imageRef=useRef(null),pointerRef=useRef(null),selectionToolbarRef=useRef(null);
  useEffect(()=>localStorage.setItem('te-boards',JSON.stringify(boards)),[boards]);
  useEffect(()=>{if(!toast)return;const t=setTimeout(()=>setToast(''),2800);return()=>clearTimeout(t)},[toast]);
+ useEffect(()=>{if(selectionMode&&!selectedChars.length)setSelectionMode(false)},[selectionMode,selectedChars.length]);
  const update=(fn,record=true)=>setBoards(prev=>prev.map(b=>{if(b.id!==active)return b;const next=fn(b);if(record){setHistory(h=>[...h.slice(-39),JSON.stringify(b)]);setFuture([])}return next}));
  const assigned=Object.values(board.placements).reduce((n,ids)=>n+(Array.isArray(ids)?ids.length:0),0);
  const visible=useMemo(()=>board.characters.filter(c=>(filter==='TODOS'||c.anime===filter)&&(!unrankedOnly||!board.placements[c.id])&&c.name.toLowerCase().includes(query.toLowerCase())),[board,filter,unrankedOnly,query]);
