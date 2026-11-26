@@ -15,3 +15,18 @@
 .library-picker::-webkit-scrollbar{width:8px}
 .library-picker::-webkit-scrollbar-track{background:#111720;border-radius:8px}
 .library-picker::-webkit-scrollbar-thumb{background:#66518f;border-radius:8px}
+
+/* Seleção direta de personagens na biblioteca inferior */
+.available-card-wrap{position:relative;min-width:0;cursor:pointer}
+.available-card-wrap .character{width:100%}
+.available-card-wrap.picked .character{outline:2px solid #a78bfa;outline-offset:2px;border-color:#a78bfa}
+.available-check{position:absolute;right:5px;top:5px;width:25px;height:25px;border-radius:50%;display:grid;place-items:center;background:#171326;border:1px solid #9b78ff;color:#e5d9ff;z-index:4;pointer-events:none}
+.selection-toolbar{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:-5px 0 15px;padding:10px;background:#111720;border:1px solid #293443;border-radius:9px}
+.selection-toolbar>span{font-size:10px;font-weight:800;color:#c9b9ff}
+.selection-toolbar select{min-width:170px;max-width:100%;background:#0b1018;border:1px solid #303b4c;border-radius:7px;padding:9px;color:#f3f4f8;font-size:10px}
+.selection-toolbar button{font-size:9px}
+.selection-toolbar button:disabled{opacity:.4;cursor:not-allowed}
+.tier-label{position:relative}
+.tier-delete{position:absolute;top:5px;right:5px;width:23px;height:23px;display:grid;place-items:center;border:0;border-radius:5px;background:#0002;color:#171b24;padding:0;z-index:2}
+.tier-delete:hover{background:#0004}
+@media(max-width:480px){.selection-toolbar{align-items:stretch}.selection-toolbar select,.selection-toolbar button{flex:1;min-width:0;justify-content:center}}
