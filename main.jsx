@@ -13,7 +13,7 @@ const colors=[['S+ — DEUSES','#f4c542'],['S — LENDÁRIOS','#ef5962'],['A —
 const initialTiers=()=>colors.map(([name,color],i)=>({id:'tier'+i,name,color,color2:'#ffffff',gradient:false,height:112}));
 const slug=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
 const initialCharacters=()=>Object.entries(raw).flatMap(([anime,names])=>[...new Set(names)].map((name,i)=>({id:anime.slice(0,2)+i+'-'+slug(name),name,anime,image:''})));
-const defaultBoard=()=>({id:crypto.randomUUID(),title:'MEU RANKING DE VILÕES',tiers:initialTiers(),placements:{},characters:initialCharacters()});
+const defaultBoard=()=>({id:crypto.randomUUID(),title:'MEU RANKING DE VILÕES',tiers:initialTiers(),placements:{},characters:[]});
 const SUPABASE_URL=import.meta.env.VITE_SUPABASE_URL||'';
 const SUPABASE_KEY=import.meta.env.VITE_SUPABASE_ANON_KEY||'';
 const supabaseReady=!!(SUPABASE_URL&&SUPABASE_KEY);
