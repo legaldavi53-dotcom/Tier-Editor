@@ -46,3 +46,24 @@
  .ranked-card-wrap{flex:0 0 auto;width:67px}
  .available-card-wrap{touch-action:pan-y}
 }
+
+/* Hotbar de personagens selecionados, com arraste para as categorias */
+.selection-hotbar{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(980px,calc(100vw - 28px));z-index:48;background:#0d121cf5;border:1px solid #66518f;border-bottom:0;border-radius:14px 14px 0 0;padding:10px 12px calc(10px + env(safe-area-inset-bottom));box-shadow:0 -12px 38px #000a;backdrop-filter:blur(14px)}
+.hotbar-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.hotbar-head strong{font-size:10px;letter-spacing:1px;color:#d9ccff}
+.hotbar-head>span{font-size:10px;color:#a78bfa;font-weight:900}
+.hotbar-head button{margin-left:auto;display:flex;align-items:center;gap:5px;background:#211b30;border:1px solid #59468b;border-radius:6px;padding:6px 9px;color:#d9ccff;font-size:9px;font-weight:800}
+.hotbar-items{display:flex;gap:9px;overflow-x:auto;overflow-y:hidden;padding:3px 3px 8px;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:#66518f #111720}
+.hotbar-card{position:relative;flex:0 0 88px;width:88px;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
+.hotbar-card .character{width:100%;touch-action:none!important;pointer-events:none;cursor:grab}
+.hotbar-card .char-name{font-size:9px;min-height:30px}
+.hotbar-card .char-anime{font-size:8px;min-height:22px}
+.hotbar-remove{position:absolute;right:-5px;top:-5px;z-index:5;width:22px;height:22px;border:1px solid #7861aa;border-radius:50%;display:grid;place-items:center;background:#251d39;color:#eee5ff;padding:0}
+.hotbar-hint{text-align:center;color:#8e7cba;font-size:9px;font-weight:800;letter-spacing:1px;padding-top:2px}
+@media(max-width:600px){
+ .selection-hotbar{width:100%;border-radius:13px 13px 0 0;padding:9px 9px calc(9px + env(safe-area-inset-bottom))}
+ .hotbar-card{flex-basis:76px;width:76px}
+ .hotbar-hint{font-size:8px}
+ .hotbar-head strong{font-size:9px}
+ .hotbar-items{max-height:155px}
+}
