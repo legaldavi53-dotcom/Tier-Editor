@@ -13,13 +13,13 @@ const colors=[['S+ — DEUSES','#f4c542'],['S — LENDÁRIOS','#ef5962'],['A —
 const initialTiers=()=>colors.map(([name,color],i)=>({id:'tier'+i,name,color,color2:'#ffffff',gradient:false,height:112}));
 const slug=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
 const initialCharacters=()=>Object.entries(raw).flatMap(([anime,names])=>[...new Set(names)].map((name,i)=>({id:anime.slice(0,2)+i+'-'+slug(name),name,anime,image:''})));
-const defaultBoard=()=>({id:crypto.randomUUID(),title:'MEU RANKING DE VILÕES',tiers:initialTiers(),placements:{},characters:[]});
+const defaultBoard=()=>({id:crypto.randomUUID(),title:'MEU RANKING DE VILÕES',tiers:initialTiers(),placements:{},characters:initialCharacters()});
 const SUPABASE_URL=import.meta.env.VITE_SUPABASE_URL||'';
 const SUPABASE_KEY=import.meta.env.VITE_SUPABASE_ANON_KEY||'';
 const supabaseReady=!!(SUPABASE_URL&&SUPABASE_KEY);
 const headers=()=>({'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Content-Type':'application/json'});
 function App(){
- const [boards,setBoards]=useState(()=>{try{return JSON.parse(localStorage.getItem('te-boards'))||[defaultBoard()]}catch{return[defaultBoard()]}});
+ const [boards,setBoards]=useState(()=>{try{const saved=JSON.parse(localStorage.getItem('te-boards'));return Array.isArray(saved)&&saved.length?saved.map(b=>({...b,characters:Array.isArray(b.characters)&&b.characters.length?b.characters:initialCharacters()})):[defaultBoard()]}catch{return[defaultBoard()]}});
  const [active,setActive]=useState(boards[0]?.id);const board=boards.find(b=>b.id===active)||boards[0];
  const [query,setQuery]=useState(''),[filter,setFilter]=useState('TODOS'),[unrankedOnly,setUnrankedOnly]=useState(false),[history,setHistory]=useState([]),[future,setFuture]=useState([]);
  const [view,setView]=useState('editor'),[libraryAnime,setLibraryAnime]=useState('ONE PIECE'),[selected,setSelected]=useState([]),[community,setCommunity]=useState([]),[communityLoading,setCommunityLoading]=useState(false),[publishName,setPublishName]=useState(''),[toast,setToast]=useState('');
